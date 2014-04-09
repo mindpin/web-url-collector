@@ -20,3 +20,4 @@ end
 require "rest_client"
 require File.expand_path("../../lib/auth",__FILE__)
 require File.expand_path("../../lib/user_store",__FILE__)
+require File.expand_path("../../lib/url_info",__FILE__)

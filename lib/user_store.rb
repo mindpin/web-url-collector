@@ -8,4 +8,5 @@ class UserStore
   field :email,  type: String
   field :avatar, type: String
 
+  has_many :url_infos
 end
