@@ -4,5 +4,11 @@
     %title WebUrlCollectorApp
     = css :application
   %body
+    - if login?
+      .page-nav
+        .action
+          %img.avatar{:src=>self.current_store.avatar}
+          .name=self.current_store.name
+          %a.logout{:href=>"/logout"} 退出登录
     = yield
     = js :application

@@ -4,9 +4,6 @@ class WebUrlCollectorApp < Sinatra::Base
   configure :development do
     register Sinatra::Reloader
   end
-  set :sessions, true
-  set :inline_templates, true
-
   set :views, ["templates"]
   set :root, File.expand_path("../../", __FILE__)
   register Sinatra::AssetPack
@@ -28,8 +25,40 @@ class WebUrlCollectorApp < Sinatra::Base
     js_compression  :uglify
   }
 
-  get '/' do
+  set :cookie_options, :domain => nil
+  helpers Sinatra::Cookies
+
+  helpers do
+    def current_store
+      Auth.current_store(self)
+    end
+
+    def login?
+      !current_store.blank?
+    end
+  end
+
+  get "/" do
+    redirect to("/login") if !current_store
     haml :index
+  end
+
+  get "/login" do
+    haml :login
+  end
+
+  post "/login" do
+    begin
+      Auth.new(params[:login], params[:password], self).login!
+      return redirect to("/")
+    rescue
+      redirect to("/login")
+    end
+  end
+
+  get "/logout" do
+    Auth.logout(self)
+    redirect to("/")
   end
   
 end

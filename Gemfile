@@ -20,3 +20,5 @@ group :test do
   gem "rspec"
   gem "database_cleaner", "~> 1.2.0"
 end
+
+gem 'rest-client'
