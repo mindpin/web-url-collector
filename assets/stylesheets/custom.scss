@@ -54,3 +54,61 @@
     clear: both;
   }
 }
+
+.page-url-info-list{
+  padding-top:20px;
+  .list{
+    margin: 20px 40px 0 40px;
+    .url-info{
+      margin: 20px 0 20px 0;
+      a.title{
+        display: block;
+        height: 30px;
+        line-height: 30px;
+        font-weight: bold;
+        font-size: 20px;
+      }
+      .tags{
+        line-height: 15px;
+        font-size: 12px; 
+      }
+    }
+  }
+}
+
+.page-url-info-show{
+  margin-top:20px;
+  .action{
+    a{
+      float: right;
+      display: block;
+      width:160px;
+      height: 36px;
+      line-height: 36px;
+      background-color: buttonface;
+      text-align: center;
+      margin-right: 5px;
+    }
+    &:after {
+      content:"";
+      display:block;
+      clear: both;
+    }
+  }
+  .url-info{
+    margin:20px 40px 0 40px;
+    div{
+      width:900px;
+      height: 36px;
+      line-height: 36px;
+      font-weight: bold;
+      font-size: 30px;
+    }
+  }
+}
+
+.navbar{
+  margin-top: 20px;
+  line-height: 30px;
+  font-size: 20px;
+}

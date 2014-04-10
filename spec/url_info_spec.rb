@@ -17,7 +17,7 @@ describe UrlInfo do
     url_info = @user_store.url_infos.create(:url => "http://www.baidu.com", :title => "test")
     url_info.valid?.should == true
     url_info.short_url.blank?.should == false
-    url_info.add_tags(@secret, "a,b,c").should == ["a","b","c"]
+    url_info.add_tags("a,b,c").should == ["a","b","c"]
     url_info.tags_array.should == ["a", "b", "c"]
   }
 

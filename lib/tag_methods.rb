@@ -1,8 +1,8 @@
 module TagMethods
-  def add_tags(secret, tags)
+  def add_tags(tags)
     raise 'url_info 还没有保存' if self.id.blank?
     param = {
-      secret: secret, 
+      secret: user_store.secret, 
       scope: R::TAG_SCOPE,
       key: self.id,
       tags: tags

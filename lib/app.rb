@@ -38,6 +38,12 @@ class WebUrlCollectorApp < Sinatra::Base
     end
   end
 
+  before do
+    if !request.path_info.match(/^\/url_infos.*$/).blank?
+      redirect "/" if !login?
+    end
+  end
+
   get "/" do
     redirect to("/login") if !current_store
     haml :index
@@ -70,7 +76,7 @@ class WebUrlCollectorApp < Sinatra::Base
         desc:      params[:desc],
         image_url: params[:image_url]
       )
-      tags = url_info.add_tags(params[:secret], params[:tags])
+      tags = url_info.add_tags(params[:tags])
       res = {
         url: url_info.url,
         short_url: url_info.short_url,
@@ -85,6 +91,17 @@ class WebUrlCollectorApp < Sinatra::Base
     rescue Exception => ex
       json error: ex
     end
+  end
+
+  get "/url_infos/:id" do
+    @url_info = UrlInfo.find(params[:id])
+    haml :url_info_show
+  end
+
+  delete "/url_infos/:id/destroy" do
+    @url_info = UrlInfo.find(params[:id])
+    @url_info.destroy
+    json status: 'ok'
   end
   
 end
