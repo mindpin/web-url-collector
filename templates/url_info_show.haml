@@ -1,0 +1,13 @@
+.navbar
+  %a{:href=>"/"}首页
+.page-url-info-show
+  .action
+    %a.delete{:href => "javascript:;",:"data-urlinfoid" => @url_info.id}删除
+  .url-info
+    .title= @url_info.title
+    .desc= @url_info.desc
+    .url= @url_info.url
+    .short_url= @url_info.short_url
+    .tags= "TAG:#{@url_info.tags_array*","}"
+    - if !@url_info.image_url.blank?
+      %img{:src=>@url_info.image_url}

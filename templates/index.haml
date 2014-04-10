@@ -1,0 +1,6 @@
+.page-url-info-list
+  .list
+    - current_store.url_infos.each do |url_info|
+      .url-info
+        %a.title{:href=>"/url_infos/#{url_info.id}"}=url_info.title
+        .tags="TAG:#{url_info.tags_array*","}"
