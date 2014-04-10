@@ -1,5 +1,6 @@
 module TagMethods
   def add_tags(tags)
+    return [] if tags.blank?
     raise 'url_info 还没有保存' if self.id.blank?
     param = {
       secret: user_store.secret, 
