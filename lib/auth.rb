@@ -1,9 +1,6 @@
 require "cgi"
 
 class Auth
-  URL        = "http://4ye.mindpin.com/account/sign_in"
-  COOKIE_KEY = "current_user_email"
-
   def initialize(login, password, context)
     @login    = login
     @password = password
@@ -11,7 +8,7 @@ class Auth
   end
 
   def login!
-    @response = JSON.parse(RestClient.post(URL, params))
+    @response = JSON.parse(RestClient.post(R::LOGIN_URL, params))
     find_or_create_user_store!
     set_cookie!
     asyn_secret
@@ -19,13 +16,13 @@ class Auth
   end
 
   def self.current_store(context)
-    email = context.cookies[COOKIE_KEY]
+    email = context.cookies[R::COOKIE_KEY]
     return if !email
     UserStore.where(email: CGI.unescape(email)).first
   end
 
   def self.logout(context)
-    context.cookies.delete COOKIE_KEY
+    context.cookies.delete R::COOKIE_KEY
   end
 
   def self.find_by_secret(secret)
@@ -37,7 +34,7 @@ class Auth
   private
 
   def set_cookie!
-    @context.cookies[COOKIE_KEY] = @store.email
+    @context.cookies[R::COOKIE_KEY] = @store.email
   end
 
   def asyn_secret
@@ -69,6 +66,6 @@ class Auth
   end
 
   def self.user_info_url(name, value)
-    "http://key-value.4ye.me/user_info?#{name}=#{value}"
+    "#{R::USER_INFO_URL}?#{name}=#{value}"
   end
 end

@@ -25,7 +25,7 @@ class WebUrlCollectorApp < Sinatra::Base
     js_compression  :uglify
   }
 
-  set :cookie_options, :domain => nil
+  set :cookie_options, domain: nil
   helpers Sinatra::Cookies
 
   helpers do
@@ -59,6 +59,32 @@ class WebUrlCollectorApp < Sinatra::Base
   get "/logout" do
     Auth.logout(self)
     redirect to("/")
+  end
+
+  post "/collect_url" do
+    begin
+      user_store = Auth.find_by_secret(params[:secret])
+      url_info = user_store.url_infos.create!(
+        url:       params[:url],
+        title:     params[:title],
+        desc:      params[:desc],
+        image_url: params[:image_url]
+      )
+      tags = url_info.add_tags(params[:secret], params[:tags])
+      res = {
+        url: url_info.url,
+        short_url: url_info.short_url,
+        title: url_info.title,
+        desc: url_info.desc,
+        image_url: url_info.image_url,
+        tags: tags, 
+        user_id: user_store.uid,
+        user_name: user_store.name
+      }
+      json res
+    rescue Exception => ex
+      json error: ex
+    end
   end
   
 end
