@@ -39,6 +39,7 @@ class WebUrlCollectorApp < Sinatra::Base
   end
 
   before do
+    headers("Access-Control-Allow-Origin" => "*")
     if !request.path_info.match(/^\/url_infos.*$/).blank?
       redirect "/" if !login?
     end
