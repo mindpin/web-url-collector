@@ -25,6 +25,7 @@ class Auth
   end
 
   def self.find_by_secret(secret)
+    return if secret.blank?
     store = UserStore.where(secret: secret).first
     return store if !store.blank?
     return create_user_store_by_info(secret)
