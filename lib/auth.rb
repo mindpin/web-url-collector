@@ -11,7 +11,6 @@ class Auth
     @response = JSON.parse(RestClient.post(R::LOGIN_URL, params))
     find_or_create_user_store!
     set_cookie!
-    asyn_secret
     true
   end
 
@@ -37,26 +36,18 @@ class Auth
     @context.cookies[R::COOKIE_KEY] = @store.email
   end
 
-  def asyn_secret
-    if @store.secret.blank?
-      user_info = JSON.parse(RestClient.get(Auth.user_info_url("email", @store.email)))
-      @store.secret = user_info["secret"]
-      @store.save
-    end
-  end
-
   def find_or_create_user_store!
     if @response.is_a?(Hash)
       @store = UserStore.find_or_create_by(email: @response["email"])
-      @store.update_attributes(name: @response["name"], avatar: @response["avatar"], uid: @response["id"])
+      @store.update_attributes(name: @response["name"], avatar: @response["avatar"], uid: @response["id"], secret: @response["secret"])
       @store.save
     end
   end
 
   def self.create_user_store_by_info(secret)
-    user_info = JSON.parse(RestClient.get(user_info_url("secret", secret)))
+    user_info = JSON.parse(RestClient.get(user_info_url(secret)))
     store = UserStore.find_or_create_by(email: user_info["email"])
-    store.update_attributes(name: user_info["name"], avatar: user_info["avatar"], uid: user_info["user_id"], secret: user_info["secret"])
+    store.update_attributes(name: user_info["name"], avatar: user_info["avatar"], uid: user_info["id"], secret: user_info["secret"])
     store.save
     store
   end
@@ -65,7 +56,7 @@ class Auth
     {user: {login: @login, password: @password}}
   end
 
-  def self.user_info_url(name, value)
-    "#{R::USER_INFO_URL}?#{name}=#{value}"
+  def self.user_info_url(value)
+    "#{R::USER_INFO_URL}?secret=#{value}"
   end
 end
