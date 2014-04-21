@@ -32,6 +32,7 @@ describe UrlInfo do
     }
     post "/collect_url", hash
     res = JSON.parse(last_response.body)
+    url_info = UrlInfo.last
     res.should == {
       "url"=>"http://www.baidu.com", 
       "short_url"=>"http://s.4ye.me/D8MIdn", 
@@ -40,7 +41,35 @@ describe UrlInfo do
       "image_url"=>"", 
       "tags"=>["搜索", "入口"], 
       "user_id"=>"9479", 
-      "user_name"=>"mindpin_test"
+      "user_name"=>"mindpin_test",
+      "site_url" => "http://collect.4ye.me/url_infos/#{url_info.id}"
     }
+
+    hash_change = {
+      secret: @secret,
+      url: "http://www.baidu.com",
+      title: "百度一下你就知道1",
+      desc: "传说中的度娘1",
+      image_url: "",
+      tags: "a,b",
+      update: true
+    }
+    post "/collect_url", hash_change
+    res = JSON.parse(last_response.body)
+    url_info_change = UrlInfo.where(url: "http://www.baidu.com").first
+    url_info_change.id.should == url_info.id
+    url_info_change.title.should == "百度一下你就知道1"
+    res.should == {
+      "url"=>"http://www.baidu.com", 
+      "short_url"=>"http://s.4ye.me/D8MIdn", 
+      "title"=>"百度一下你就知道1", 
+      "desc"=>"传说中的度娘1", 
+      "image_url"=>"", 
+      "tags"=>["a", "b"], 
+      "user_id"=>"9479", 
+      "user_name"=>"mindpin_test",
+      "site_url" => "http://collect.4ye.me/url_infos/#{url_info_change.id}"
+    }
+
   }
 end

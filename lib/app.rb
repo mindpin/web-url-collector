@@ -71,12 +71,21 @@ class WebUrlCollectorApp < Sinatra::Base
   post "/collect_url" do
     begin
       user_store = Auth.find_by_secret(params[:secret])
-      url_info = user_store.url_infos.create!(
-        url:       params[:url],
-        title:     params[:title],
-        desc:      params[:desc],
-        image_url: params[:image_url]
-      )
+      if !params[:update]
+        url_info = user_store.url_infos.create!(
+          url:       params[:url],
+          title:     params[:title],
+          desc:      params[:desc],
+          image_url: params[:image_url]
+        )
+      else
+        url_info = user_store.url_infos.where(url: params[:url]).first
+        url_info.update_attributes(
+          title:     params[:title],
+          desc:      params[:desc],
+          image_url: params[:image_url]
+        )
+      end
       tags = url_info.add_tags(params[:tags])
       res = {
         url: url_info.url,
@@ -86,7 +95,8 @@ class WebUrlCollectorApp < Sinatra::Base
         image_url: url_info.image_url,
         tags: tags, 
         user_id: user_store.uid,
-        user_name: user_store.name
+        user_name: user_store.name,
+        site_url: "http://collect.4ye.me/url_infos/#{url_info.id}"
       }
       json res
     rescue Exception => ex
