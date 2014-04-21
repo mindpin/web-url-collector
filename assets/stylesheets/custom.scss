@@ -36,6 +36,18 @@
       float: left;
       line-height: 30px;
     }
+    .collects {
+      margin-left:5px;
+      float:left;
+      display: block;
+      line-height: 30px;
+    }
+    .get-plugin {
+      margin-left:5px;
+      float:left;
+      display: block;
+      line-height: 30px;
+    }
     .logout{
       margin-left: 5px;
       float: left;
@@ -111,4 +123,31 @@
   margin-top: 20px;
   line-height: 30px;
   font-size: 20px;
+}
+
+.page-get-plugin {
+  border:solid 1px #eee;
+  background-color:#ffffda;
+  padding: 20px;
+  margin-top:100px;
+
+  .desc {
+    margin-bottom:30px;
+  }
+
+  .button {
+    a.btn.plugin {
+      background-color:#009800;
+      height:32px;line-height:32px;
+      border-radius:3px;
+      color:white;
+      display:block;
+      width:120px;
+      text-align:center;
+      border:solid 1px rgba(black, 0.1);
+      text-shadow:0 0 1px black;
+      margin-bottom:30px;
+      font-size:16px;
+    }
+  }
 }
