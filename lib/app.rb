@@ -36,6 +36,12 @@ class WebUrlCollectorApp < Sinatra::Base
     def login?
       !current_store.blank?
     end
+
+    def get_plugin_script
+      secret = current_store.secret
+      site = request.url.sub request.path_info, ''
+      "javascript:void(function(d){window.USER_SECRET='#{secret}';window.M4YE_SITE='#{site}/';var l=function(u){var e=d.createElement('script');e.setAttribute('type','text/javascript');e.setAttribute('charset','UTF-8');e.setAttribute('src',u);d.body.appendChild(e)};l(window.M4YE_SITE+'web-url-collector.js?r='+Math.random())}(document));"
+    end
   end
 
   before do
@@ -150,6 +156,10 @@ class WebUrlCollectorApp < Sinatra::Base
     @url_info = UrlInfo.find(params[:id])
     @url_info.destroy
     json status: 'ok'
+  end
+
+  get "/get_plugin" do
+    haml :get_plugin
   end
   
 end
