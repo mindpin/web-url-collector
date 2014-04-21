@@ -47,6 +47,7 @@ class Auth
 
   def self.create_user_store_by_info(secret)
     user_info = JSON.parse(RestClient.get(user_info_url(secret)))
+    return if user_info["email"].blank?
     store = UserStore.find_or_create_by(email: user_info["email"])
     store.update_attributes(name: user_info["name"], avatar: user_info["avatar"], uid: user_info["id"], secret: user_info["secret"])
     store.save
