@@ -6,9 +6,9 @@
 
   M4YE_SITE = window.M4YE_SITE;
 
-  COLLECT_URL = 'http://collect.4ye.me/collect_url';
+  COLLECT_URL = "" + M4YE_SITE + "collect_url";
 
-  CHECK_URL = 'http://collect.4ye.me/check_url';
+  CHECK_URL = "" + M4YE_SITE + "check_url";
 
   USER_INFO_URL = 'http://4ye.mindpin.com/api/user_info';
 

@@ -1,10 +1,11 @@
 !!!
-%html
+%html{:lang => :zh}
   %head
-    %title WebUrlCollectorApp
+    %meta{:'http-equiv' => 'Content-Type', :content => 'text/html; charset=utf-8'}
+    %title 四叶书签
     = css :application
   %body
-    - if login?
+    - if signed_in?
       .page-nav
         .action
           %img.avatar{:src=>self.current_store.avatar}
