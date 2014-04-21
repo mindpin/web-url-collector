@@ -105,7 +105,7 @@ class WebUrlCollectorApp < Sinatra::Base
     end
   end
 
-  post "/check_url" do
+  get "/check_url" do
     begin
       user_store = Auth.find_by_secret(params[:secret])
       url_info = user_store.url_infos.where(url: params[:url]).first
