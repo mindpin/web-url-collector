@@ -21,11 +21,16 @@ class UrlInfo
   validates :short_url, presence: true
 
   before_validation do |url_info|
+    url_info.short_url = UrlInfo.get_short_url(url_info.url)
+  end
+
+  def self.get_short_url(url)
     uri = URI.parse(R::SHORT_URL_URL)
-    res = Net::HTTP.post_form(uri, long_url: url_info.url)
+    res = Net::HTTP.post_form(uri, long_url: url)
     if res.code == "200"
       info = JSON.parse(res.body)
-      url_info.short_url = info["short_url"]
+      return info["short_url"]
     end
+    return ""
   end
 end

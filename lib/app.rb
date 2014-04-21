@@ -105,6 +105,42 @@ class WebUrlCollectorApp < Sinatra::Base
     end
   end
 
+  post "/check_url" do
+    begin
+      user_store = Auth.find_by_secret(params[:secret])
+      url_info = user_store.url_infos.where(url: params[:url]).first
+      if url_info.blank?
+        res = {
+          collected: false,
+          data: {
+            url: params[:url],
+            short_url:  UrlInfo.get_short_url(params[:url])
+          }
+        }
+        json res
+      else
+        res = {
+          collected: true,
+          data: {
+            url: url_info.url,
+            short_url: url_info.short_url,
+            title: url_info.title,
+            desc: url_info.desc,
+            image_url: url_info.image_url,
+            tags: url_info.tags_array, 
+            user_id: user_store.uid,
+            user_name: user_store.name,
+            site_url: "http://collect.4ye.me/url_infos/#{url_info.id}"
+          }
+        }
+        json res
+      end
+    rescue Exception => ex
+      status 400
+      json status: 'error', info: ex.message
+    end
+  end
+
   get "/url_infos/:id" do
     @url_info = UrlInfo.find(params[:id])
     haml :url_info_show
