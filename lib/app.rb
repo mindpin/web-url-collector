@@ -100,8 +100,8 @@ class WebUrlCollectorApp < Sinatra::Base
       }
       json res
     rescue Exception => ex
-      status 500
-      json error: ex
+      status 400
+      json status: 'error', info: ex.message
     end
   end
 

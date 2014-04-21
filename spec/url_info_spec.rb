@@ -71,5 +71,11 @@ describe UrlInfo do
       "site_url" => "http://collect.4ye.me/url_infos/#{url_info_change.id}"
     }
 
+    hash_error = {
+      secret: "abc"
+    }
+    post "/collect_url", hash_error
+    res = JSON.parse(last_response.body)
+    res.should == {"status"=>"error", "info"=>"undefined method `url_infos' for nil:NilClass"}
   }
 end
