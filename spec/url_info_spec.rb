@@ -83,7 +83,7 @@ describe UrlInfo do
       secret: @secret,
       url: "http://www.baidu.com"
     }
-    post "/check_url", check_hash
+    get "/check_url", check_hash
     res = JSON.parse(last_response.body)
     url_info = UrlInfo.last
     res.should == {
@@ -105,7 +105,7 @@ describe UrlInfo do
       secret: @secret,
       url: "http://www.baidu.com123"
     }
-    post "/check_url", check_hash_unexist
+    get "/check_url", check_hash_unexist
     res = JSON.parse(last_response.body)
     url_info = UrlInfo.last
     res.should == {
@@ -119,7 +119,7 @@ describe UrlInfo do
     check_hash_unexist = {
       secret: 11111
     }
-    post "/check_url", check_hash_unexist
+    get "/check_url", check_hash_unexist
     res = JSON.parse(last_response.body)
     res.should == {"status"=>"error", "info"=>"undefined method `url_infos' for nil:NilClass"}
   }
