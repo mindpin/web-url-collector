@@ -71,7 +71,7 @@ class WebUrlCollectorApp < Sinatra::Base
     end
   end
 
-  get "/logout" do
+  get "/sign_out" do
     Auth.logout(self)
     redirect to("/")
   end

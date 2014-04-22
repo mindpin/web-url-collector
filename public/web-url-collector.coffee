@@ -444,6 +444,7 @@ init ->
     check_url: ->
       @$loading.show()
       @submit_enabled(false)
+      @$loading_info.html @STRING_INIT
 
       jQuery.ajax
         url: CHECK_URL
@@ -469,6 +470,7 @@ init ->
 
       @submit_enabled(false)
 
+      @$loading_info.html @STRING_SAVING
       @$inputs.slideUp @ANIMATE_DURATION
       @$loading.slideDown @ANIMATE_DURATION, =>
         # setTimeout =>

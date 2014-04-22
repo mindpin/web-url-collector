@@ -394,6 +394,7 @@
       Collector.prototype.check_url = function() {
         this.$loading.show();
         this.submit_enabled(false);
+        this.$loading_info.html(this.STRING_INIT);
         return jQuery.ajax({
           url: CHECK_URL,
           type: 'GET',
@@ -423,6 +424,7 @@
         desc = this.$desc_input.val();
         tags = this.$tags_input.val();
         this.submit_enabled(false);
+        this.$loading_info.html(this.STRING_SAVING);
         this.$inputs.slideUp(this.ANIMATE_DURATION);
         return this.$loading.slideDown(this.ANIMATE_DURATION, (function(_this) {
           return function() {
