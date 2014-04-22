@@ -20,6 +20,8 @@ class UrlInfo
   validates :user_store_id, presence: true
   validates :short_url, presence: true
 
+  default_scope order_by("updated_at DESC")
+
   before_validation do |url_info|
     url_info.short_url = UrlInfo.get_short_url(url_info.url)
   end
