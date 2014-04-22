@@ -1,14 +1,17 @@
 !!!
-%html
+%html{:lang => :zh}
   %head
-    %title WebUrlCollectorApp
+    %meta{:'http-equiv' => 'Content-Type', :content => 'text/html; charset=utf-8'}
+    %title 四叶书签
     = css :application
   %body
-    - if login?
+    - if signed_in?
       .page-nav
         .action
           %img.avatar{:src=>self.current_store.avatar}
           .name=self.current_store.name
+          %a.collects{:href=>'/'} 书签列表
+          %a.get-plugin{:href=>'/get_plugin'} 获取插件
           %a.logout{:href=>"/logout"} 退出登录
     = yield
     = js :application

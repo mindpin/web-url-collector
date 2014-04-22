@@ -8,12 +8,14 @@ class WebUrlCollectorApp < Sinatra::Base
   set :root, File.expand_path("../../", __FILE__)
   register Sinatra::AssetPack
 
+  set :scss, {:load_paths => [ "#{WebUrlCollectorApp.root}/assets/stylesheets" ]}
+
   assets {
     serve '/js', :from => 'assets/javascripts'
     serve '/css', :from => 'assets/stylesheets'
 
     js :application, "/js/application.js", [
-      '/js/jquery-1.11.0.min.js',
+      '/js/jquery-2.1.0.min.js',
       '/js/**/*.js'
     ]
 
@@ -33,33 +35,39 @@ class WebUrlCollectorApp < Sinatra::Base
       Auth.current_store(self)
     end
 
-    def login?
+    def signed_in?
       !current_store.blank?
+    end
+
+    def get_plugin_script
+      secret = current_store.secret
+      site = request.url.sub request.path_info, ''
+      "javascript:void(function(d){window.USER_SECRET='#{secret}';window.M4YE_SITE='#{site}/';var l=function(u){var e=d.createElement('script');e.setAttribute('type','text/javascript');e.setAttribute('charset','UTF-8');e.setAttribute('src',u);d.body.appendChild(e)};l(window.M4YE_SITE+'web-url-collector.js?r='+Math.random())}(document));"
     end
   end
 
   before do
     headers("Access-Control-Allow-Origin" => "*")
     if !request.path_info.match(/^\/url_infos.*$/).blank?
-      redirect "/" if !login?
+      redirect "/" if !signed_in?
     end
   end
 
   get "/" do
-    redirect to("/login") if !current_store
+    redirect to("/sign_in") if !signed_in?
     haml :index
   end
 
-  get "/login" do
-    haml :login
+  get "/sign_in" do
+    haml :sign_in
   end
 
-  post "/login" do
+  post "/sign_in" do
     begin
-      Auth.new(params[:login], params[:password], self).login!
+      Auth.new(params[:email], params[:password], self).login!
       return redirect to("/")
     rescue
-      redirect to("/login")
+      redirect to("/sign_in")
     end
   end
 
@@ -150,6 +158,10 @@ class WebUrlCollectorApp < Sinatra::Base
     @url_info = UrlInfo.find(params[:id])
     @url_info.destroy
     json status: 'ok'
+  end
+
+  get "/get_plugin" do
+    haml :get_plugin
   end
   
 end

@@ -12,4 +12,22 @@ jQuery ->
 
 
 
+class SignInForm
+  constructor: (@$form)->
+    @$submit = @$form.find 'a.btn.submit'
 
+  init: ->
+    @$submit.click =>
+      @$form.submit()
+
+    @$form
+      .find 'input.password'
+      .keypress (evt)=>
+        if evt.which == 13
+          evt.preventDefault()
+          @$form.submit()
+
+jQuery ->
+  if jQuery('.page-sign-in').length > 0
+    form = new SignInForm jQuery('.page-sign-in form')
+    form.init()
