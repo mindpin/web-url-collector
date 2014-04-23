@@ -44,6 +44,10 @@ class UrlInfo
     host.start_with?('www.') ? host[4..-1] : host
   end
 
+  def desc
+    attributes["desc"] || ""
+  end
+
   def html_desc
     self.desc.gsub "\n", "<br/>"
   end
