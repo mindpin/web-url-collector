@@ -55,6 +55,9 @@ class WebUrlCollectorApp < Sinatra::Base
 
   get "/" do
     redirect to("/sign_in") if !signed_in?
+
+    # @url_infos = current_store.url_infos.page(params[:page]).per(2)
+    @url_infos = current_store.url_infos
     haml :index
   end
 
@@ -71,7 +74,7 @@ class WebUrlCollectorApp < Sinatra::Base
     end
   end
 
-  get "/logout" do
+  get "/sign_out" do
     Auth.logout(self)
     redirect to("/")
   end

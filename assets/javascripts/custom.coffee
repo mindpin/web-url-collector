@@ -1,6 +1,6 @@
 jQuery ->
-  jQuery('.page-url-info-show .action a.delete').click (evt)->
-    res = window.confirm "确定删除吗?"
+  jQuery('.page-url-info-show .actions a.delete').click (evt)->
+    res = window.confirm "确定删除这个网址吗?"
     if res == true
       url_info_id = jQuery(this).data("urlinfoid")
       jQuery.ajax

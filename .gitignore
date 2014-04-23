@@ -25,3 +25,5 @@ config/secrets.yml
 
 config/env.yml
 config/mongoid.yml
+
+.sass-cache

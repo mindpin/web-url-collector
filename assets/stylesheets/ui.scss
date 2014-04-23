@@ -9,9 +9,12 @@ body {
 }
 
 .page-sign-in {
-  margin-top:150px;
+  position:fixed;
+  top:0;bottom:0;
+  left:0;right:0;
+  padding-top:150px;
   background-color:#2A70E8;
-  height:500px;
+  // height:500px;
 
   form {
     width:960px;height:500px;
@@ -125,116 +128,52 @@ body {
   }
 }
 
-.page-nav{
-  padding-top: 5px;
-  height: 40px;
-  .action{
-    float: right;
-    img.avatar{
-      float: left;
-      height: 30px;
-      width: 30px;
-      display: block;
-    }
-    .name{
-      margin-left: 5px;
-      float: left;
-      line-height: 30px;
-    }
-    .collects {
-      margin-left:5px;
+.page-header {
+  background-color:#F1F1F1;
+  height:50px;
+  border-bottom:dashed 1px rgba(black, 0.2);
+  .page-nav {
+    height:50px;line-height:50px;
+    width:960px;margin:0 auto;
+    .avatar {
       float:left;
-      display: block;
-      line-height: 30px;
+      margin-top:9px;
+      box-shadow:0 0 3px rgba(black, 0.15);
     }
-    .get-plugin {
-      margin-left:5px;
+    .name {
       float:left;
-      display: block;
-      line-height: 30px;
+      margin-left:15px;
+      margin-right:30px;
     }
-    .logout{
-      margin-left: 5px;
-      float: left;
-      display: block;
-      line-height: 30px;
-    }
-    &:after {
-      content:"";
-      display:block;
-      clear: both;
-    }
-  }
-  &:after {
-    content:"";
-    display:block;
-    clear: both;
-  }
-}
 
-.page-url-info-list{
-  padding-top:20px;
-  .list{
-    margin: 20px 40px 0 40px;
-    .url-info{
-      margin: 20px 0 20px 0;
-      a.title{
-        display: block;
-        height: 30px;
-        line-height: 30px;
-        font-weight: bold;
-        font-size: 20px;
-      }
-      .tags{
-        line-height: 15px;
-        font-size: 12px; 
+    a {
+      display:block;
+      float:left;
+      padding:0 15px;
+      text-decoration:none;
+      color:#666;
+      &:hover, &.active{
+        background-color:rgba(white, 0.6);
+        color:black;
       }
     }
-  }
-}
 
-.page-url-info-show{
-  margin-top:20px;
-  .action{
-    a{
-      float: right;
-      display: block;
-      width:160px;
-      height: 36px;
-      line-height: 36px;
-      background-color: buttonface;
-      text-align: center;
-      margin-right: 5px;
-    }
-    &:after {
-      content:"";
-      display:block;
-      clear: both;
-    }
-  }
-  .url-info{
-    margin:20px 40px 0 40px;
-    div{
-      width:900px;
-      height: 36px;
-      line-height: 36px;
-      font-weight: bold;
-      font-size: 30px;
+    a.sign-out {
+      float:right;
     }
   }
 }
 
-.navbar{
-  margin-top: 20px;
-  line-height: 30px;
-  font-size: 20px;
+.page-content {
+  margin: 50px auto;
+  padding-bottom:100px;
+  width:960px;
 }
 
 .page-get-plugin {
-  border:solid 1px #eee;
-  background-color:#ffffda;
-  padding: 20px;
-  margin-top:100px;
+  background-color:#FFFBE3;
+  padding:30px;
+  border-radius: 5px;
 
   .desc {
     margin-bottom:30px;
@@ -253,6 +192,168 @@ body {
       text-shadow:0 0 1px black;
       margin-bottom:30px;
       font-size:16px;
+      text-decoration:none;
+    }
+  }
+}
+
+.page-url-info-list {
+  .total {
+    color:#999;
+    margin-bottom:30px;
+  }
+
+  .list {
+    width:600px;
+    .url-info {
+      margin-bottom:30px;
+      border-bottom:dashed 1px #ccc;
+      padding-bottom:30px;
+
+      a.title {
+        color:#0072D6;
+        text-decoration:none;
+      }
+
+      .site {
+        i {font-size:12px;color:#999;margin-right:10px;}
+        span {
+          color:#888;
+          font-size:14px;
+          text-decoration:none;
+          // &:hover {
+          //   text-decoration:underline;
+          // }
+        }
+      }
+
+      .desc {
+        background-color:#F9F9F9;
+        border-left:solid 3px #ddd;
+        border-bottom:solid 1px #EEEEEE;
+        padding:10px 15px;
+        margin-top:10px;margin-bottom:10px;
+        font-size:14px;
+      }
+
+      .tags {
+        margin-top:10px;
+        font-size:14px;
+        i {
+          font-size:12px;
+          color: #666; margin-right:5px;}
+        span.tag {
+          color:#666;
+          margin: 0 5px;
+        }
+      }
+    }
+  }
+
+  .paginate {
+    a.page {
+      display:block;
+      float:left;
+      width:32px;height:32px;line-height:32px;
+      text-align:center;
+      color:#444;
+      text-decoration:none;
+      background-color:#F9F9F9;
+      border-radius:100px;
+      margin-right:10px;
+      &:hover {
+        background-color:#eee;
+      }
+
+      &.current {
+        background:none !important;
+        color:#333;
+      }
+    }
+
+    a.current {
+      color:#999;
+    }
+  }
+}
+
+.page-url-info-show {
+  .actions {
+    overflow:hidden;
+    margin-bottom:50px;
+    a {
+      display:block;
+      float:left;
+      width:64px;height:64px;line-height:64px;
+      font-size:32px;
+      text-align:center;
+      text-decoration:none;
+      color:#444;
+      background-color:#F9F9F9;
+      border-radius:100px;
+      margin-right:20px;
+      &:hover {
+        background-color:#eee;
+      }
+    }
+
+    a.delete {
+      background-color:rgba(red, 0.1);
+      color:#980000;
+      &:hover {
+        background-color:rgba(red, 0.2);
+      }
+    }
+  }
+
+  .url-info {
+    margin-bottom:30px;
+    padding-bottom:30px;
+    width:600px;
+
+    .title {
+      font-size:18px;
+      margin-bottom:5px;
+    }
+
+    .site {
+      margin-bottom:20px;
+
+      i {font-size:12px;color:#999;margin-right:10px;}
+      span {
+        color:#888;
+        font-size:14px;
+        text-decoration:none;
+        // &:hover {
+        //   text-decoration:underline;
+        // }
+      }
+    }
+
+    .desc {
+      background-color:#F9F9F9;
+      border-left:solid 3px #ddd;
+      border-bottom:solid 1px #EEEEEE;
+      padding:10px 15px;
+      margin-top:30px;margin-bottom:30px;
+      font-size:14px;
+    }
+
+    .tags {
+      margin-top:10px;
+      font-size:14px;
+      i {
+        font-size:12px;
+        color: #666; margin-right:5px;}
+      span.tag {
+        color:#666;
+        margin: 0 5px;
+      }
+    }
+
+    .url, .short-url {
+      a {color:#0072D6;}
+      margin-bottom:10px;
     }
   }
 }

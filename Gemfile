@@ -11,6 +11,8 @@ gem 'sass'
 gem 'coffee-script'
 gem 'yui-compressor'
 gem 'uglifier'
+gem 'kaminari', '~> 0.15.1'
+# gem 'padrino-helpers' # sinatra only, for kaminari helpers
 
 gem 'mina',
     :git => 'git://github.com/fushang318/mina.git',

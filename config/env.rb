@@ -13,6 +13,8 @@ require 'sinatra/json'
 require 'mongoid'
 Mongoid.load!("./config/mongoid.yml")
 
+require 'kaminari/sinatra'
+
 # ENV_YAML = YAML.load_file("config/env.yml")
 class R
   LOGIN_URL      = "http://4ye.mindpin.com/account/sign_in"
