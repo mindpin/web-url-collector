@@ -189,7 +189,7 @@
         this.$title_input = jQuery('<input />').addClass('mwuc-title').attr('name', 'mwuc-title').attr('placeholder', '网页标题').css({
           'cssText': 'color: #222 !important;',
           'border': 'solid 1px #BBBBBB',
-          'box-shadow': '0 1px 2px rgba(0, 0, 0, 0.15)',
+          'box-shadow': '0 1px 2px rgba(0, 0, 0, 0.15) inset',
           'width': 320 - 20 - 14,
           'height': 20,
           'line-height': '20px',
@@ -209,7 +209,7 @@
         this.$desc_input = jQuery('<textarea />').addClass('mwuc-desc').attr('name', 'mwuc-desc').attr('placeholder', '写点什么呗 …').css({
           'cssText': 'color: #222 !important;',
           'border': 'solid 1px #BBBBBB',
-          'box-shadow': '0 1px 2px rgba(0, 0, 0, 0.15)',
+          'box-shadow': '0 1px 2px rgba(0, 0, 0, 0.15) inset',
           'width': 320 - 20 - 14,
           'height': 100,
           'line-height': '20px',
@@ -230,7 +230,7 @@
         return this.$tags_input = jQuery('<input />').addClass('mwuc-tags').attr('name', 'mwuc-tags').attr('placeholder', 'TAGs').css({
           'cssText': 'color: #222 !important;',
           'border': 'solid 1px #BBBBBB',
-          'box-shadow': '0 1px 2px rgba(0, 0, 0, 0.15)',
+          'box-shadow': '0 1px 2px rgba(0, 0, 0, 0.15) inset',
           'width': 320 - 20 - 14,
           'height': 20,
           'line-height': '20px',
