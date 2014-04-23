@@ -1,10 +1,11 @@
 # javascript:void(function(d){window.USER_SECRET='d7304a2ceb3bab7cfcdb5152cff6f5a4';window.M4YE_SITE='//192.168.1.26:4000/js-plugins/';var l=function(u){var e=d.createElement('script');e.setAttribute('type','text/javascript');e.setAttribute('charset','UTF-8');e.setAttribute('src',u);d.body.appendChild(e)};l(window.M4YE_SITE+'web-url-collector.js?r='+Math.random())}(document));
 
 USER_SECRET = window.USER_SECRET
-M4YE_SITE = window.M4YE_SITE
+M4YE_SITE   = window.M4YE_SITE
 
-COLLECT_URL = 'http://collect.4ye.me/collect_url'
-CHECK_URL = 'http://collect.4ye.me/check_url'
+COLLECT_URL = "#{M4YE_SITE}collect_url"
+CHECK_URL   = "#{M4YE_SITE}check_url"
+
 USER_INFO_URL = 'http://4ye.mindpin.com/api/user_info'
 
 init = (func)->
@@ -222,7 +223,7 @@ init ->
         .css
           'cssText': 'color: #222 !important;'
           'border': 'solid 1px #BBBBBB'
-          'box-shadow': '0 1px 2px rgba(0, 0, 0, 0.15)'
+          'box-shadow': '0 1px 2px rgba(0, 0, 0, 0.15) inset'
           'width': 320 - 20 - 14
           'height': 20
           'line-height': '20px'
@@ -248,7 +249,7 @@ init ->
         .css
           'cssText': 'color: #222 !important;'
           'border': 'solid 1px #BBBBBB'
-          'box-shadow': '0 1px 2px rgba(0, 0, 0, 0.15)'
+          'box-shadow': '0 1px 2px rgba(0, 0, 0, 0.15) inset'
           'width': 320 - 20 - 14
           'height': 100
           'line-height': '20px'
@@ -274,7 +275,7 @@ init ->
         .css
           'cssText': 'color: #222 !important;'
           'border': 'solid 1px #BBBBBB'
-          'box-shadow': '0 1px 2px rgba(0, 0, 0, 0.15)'
+          'box-shadow': '0 1px 2px rgba(0, 0, 0, 0.15) inset'
           'width': 320 - 20 - 14
           'height': 20
           'line-height': '20px'
@@ -443,6 +444,7 @@ init ->
     check_url: ->
       @$loading.show()
       @submit_enabled(false)
+      @$loading_info.html @STRING_INIT
 
       jQuery.ajax
         url: CHECK_URL
@@ -468,6 +470,7 @@ init ->
 
       @submit_enabled(false)
 
+      @$loading_info.html @STRING_SAVING
       @$inputs.slideUp @ANIMATE_DURATION
       @$loading.slideDown @ANIMATE_DURATION, =>
         # setTimeout =>

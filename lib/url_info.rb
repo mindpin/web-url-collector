@@ -20,6 +20,8 @@ class UrlInfo
   validates :user_store_id, presence: true
   validates :short_url, presence: true
 
+  default_scope order_by("updated_at DESC")
+
   before_validation do |url_info|
     url_info.short_url = UrlInfo.get_short_url(url_info.url)
   end
@@ -32,5 +34,21 @@ class UrlInfo
       return info["short_url"]
     end
     return ""
+  end
+
+  def site
+    url = self.url
+
+    url = "http://#{url}" if URI.parse(url).scheme.nil?
+    host = URI.parse(url).host.downcase
+    host.start_with?('www.') ? host[4..-1] : host
+  end
+
+  def desc
+    attributes["desc"] || ""
+  end
+
+  def html_desc
+    self.desc.gsub "\n", "<br/>"
   end
 end

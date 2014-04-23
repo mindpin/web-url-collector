@@ -1,6 +1,40 @@
 .page-url-info-list
+  .total 你一共收集了 #{@url_infos.count} 个网址…
+
   .list
-    - current_store.url_infos.each do |url_info|
+    - @url_infos.each do |url_info|
+      :ruby
+        html_desc = url_info.html_desc
+        tags_array = url_info.tags_array
+
       .url-info
-        %a.title{:href=>"/url_infos/#{url_info.id}"}=url_info.title
-        .tags="TAG:#{url_info.tags_array*","}"
+        %a.title{:href => "/url_infos/#{url_info.id}"}= url_info.title
+        .site
+          %i.fa.fa-arrow-right
+          %span= url_info.site
+
+        - if !html_desc.blank?
+          .desc= html_desc
+
+        - if !tags_array.blank?
+          .tags
+            %i.fa.fa-tags
+            - tags_array.each do |tag|
+              %span.tag ##{tag}
+
+    / .paginate
+    /   - if @url_infos.num_pages > 1
+    /     %a.page.prev{:href => 'javascript:;'}
+    /       %i.fa.fa-arrow-left
+
+    /     - @url_infos.num_pages.times do |i|
+    /       - num = i + 1
+    /       - if num == @url_infos.current_page
+    /         %a.page.current{:href => 'javascript:;'}
+    /           %span= num
+    /       - else
+    /         %a.page{:href => 'javascript:;'}
+    /           %span= num
+
+    /     %a.page.next{:href => 'javascript:;'}
+    /       %i.fa.fa-arrow-right

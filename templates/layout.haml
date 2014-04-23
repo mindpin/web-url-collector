@@ -1,16 +1,38 @@
 !!!
-%html
+%html{:lang => :zh}
   %head
-    %title WebUrlCollectorApp
+    %meta{:'http-equiv' => 'Content-Type', :content => 'text/html; charset=utf-8'}
+    %title 四叶书签
     = css :application
   %body
-    - if login?
-      .page-nav
-        .action
-          %img.avatar{:src=>self.current_store.avatar}
-          .name=self.current_store.name
-          %a.collects{:href=>'/'} 书签列表
-          %a.get-plugin{:href=>'/get_plugin'} 获取插件
-          %a.logout{:href=>"/logout"} 退出登录
-    = yield
+    - if signed_in?
+      :ruby
+        path = request.path_info
+        klass1 = path == "/" ? 'active' : ''
+        klass2 = path == "/get_plugin" ? 'active' : ''
+
+      .page-header
+        .page-nav
+          .pie.avatar.s32
+            %img{:src => self.current_store.avatar}
+          .name= self.current_store.name
+
+          %a.collects{:href=>'/', :class => klass1} 
+            %i.fa.fa-list
+            %span 书签列表
+
+          %a.get-plugin{:href=>'/get_plugin', :class => klass2}
+            %i.fa.fa-cloud-download
+            %span 获取插件
+
+          %a.sign-out{:href=>"/sign_out"} 
+            %i.fa.fa-sign-out
+            %span 退出登录
+
+      .page-content
+        = yield
+
+    - else
+      = yield
+
     = js :application
