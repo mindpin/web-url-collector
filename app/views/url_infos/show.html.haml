@@ -9,7 +9,7 @@
   .url-info
     :ruby
       tags_array = @url_info.tags_array
-      html_desc = @url_info.html_desc
+      desc = @url_info.desc
 
     .title= @url_info.title
     .site
@@ -24,8 +24,8 @@
       %span 短网址：
       %a{:href => @url_info.short_url}= @url_info.short_url
 
-    - if !html_desc.blank?
-      .desc= html_desc
+    - if !desc.blank?
+      .desc= simple_format desc
 
     - if !tags_array.blank?
       .tags

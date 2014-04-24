@@ -3,8 +3,14 @@
 @import 'avatar';
 
 body {
+  overflow-y:scroll;
+
   input {
     font-family: helvetica, arial, 微软雅黑;
+  }
+
+  a {
+    color:#0072D6;
   }
 }
 
@@ -234,6 +240,7 @@ body {
         padding:10px 15px;
         margin-top:10px;margin-bottom:10px;
         font-size:14px;
+        p {margin:0;}
       }
 
       .tags {
@@ -337,6 +344,7 @@ body {
       padding:10px 15px;
       margin-top:30px;margin-bottom:30px;
       font-size:14px;
+      p {margin:0;}
     }
 
     .tags {
@@ -354,6 +362,67 @@ body {
     .url, .short-url {
       a {color:#0072D6;}
       margin-bottom:10px;
+    }
+  }
+}
+
+.pagination {
+  margin-top:0;
+  margin-bottom:20px;
+  height:30px;
+  overflow:visible;
+
+  ul {
+    border-radius:4px;
+    box-shadow:0 1px 2px rgba(black, 0.05);
+    margin-bottom:0;
+    margin-left:0;
+    padding:0;
+    margin-top:0;
+    display:inline-block;
+
+    & > li {
+      display:inline;
+      line-height:20px;
+      font-size:14px;
+
+      & > a, & > span {
+        background-color:white;
+        border-color:#ddd;
+        border-image:none;
+        border-style:solid;
+        border-width:1px 1px 1px 0;
+        float:left;
+        line-height:20px;
+        padding:4px 12px;
+        text-decoration:none;
+        &:hover, &:focus {
+          background-color:#f5f5f5;
+        }
+      }
+
+      &:first-child {
+        & > a, & > span {
+          border-bottom-left-radius:4px;
+          border-left-width:1px;
+          border-top-left-radius:4px;
+        }
+      }
+
+      &:last-child {
+        & > a, & > span {
+          border-bottom-right-radius:4px;
+          border-top-right-radius:4px;
+        }
+      }
+
+      &.active {
+        & > a, & > span {
+          color:#999;
+          cursor:default;
+          background-color:#f5f5f5;
+        }
+      }
     }
   }
 }

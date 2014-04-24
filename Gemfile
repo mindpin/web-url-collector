@@ -1,4 +1,4 @@
-source "https://rubygems.org"
+source "http://ruby.taobao.org"
 
 gem "rails", "4.1.0"
 gem "sass-rails", "~> 4.0.3"
@@ -13,17 +13,17 @@ gem "bson_ext"
 gem "jquery-rails"
 gem "turbolinks"
 gem "jbuilder", "~> 2.0"
-gem "sdoc", "~> 0.4.0", group: :doc
+gem "sdoc", "~> 0.4.0", :group => :doc
 
-gem "spring", group: :development
+gem "spring", :group => :development
 
 gem "unicorn"
 
-gem "debugger", group: [:development, :test]
+gem "debugger", :group => [:development, :test]
 
 gem "mina",
-    git: "git://github.com/fushang318/mina.git",
-    tag: "v0.2.0fix"
+    :git => "git://github.com/fushang318/mina.git",
+    :tag => "v0.2.0fix"
 
 gem "rest-client"
 
