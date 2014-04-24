@@ -7,7 +7,7 @@ gem "coffee-rails", "~> 4.0.0"
 gem "kaminari", "~> 0.15.1"
 gem "haml"
 gem "pry"
-gem "mongoid", "~> 4.0.0.beta1", github: "mongoid/mongoid"
+gem "mongoid", "~> 4.0.0.beta1"
 gem "bson_ext"
 
 gem "jquery-rails"

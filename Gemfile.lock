@@ -7,16 +7,6 @@ GIT
       open4
       rake
 
-GIT
-  remote: git://github.com/mongoid/mongoid.git
-  revision: 4893e77bb858b4f87d406115129cf8ca9d2c4f36
-  specs:
-    mongoid (4.0.0.beta1)
-      activemodel (>= 4.0.0)
-      moped (~> 2.0.beta6)
-      origin (~> 2.1)
-      tzinfo (>= 0.3.37)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -91,6 +81,11 @@ GEM
     method_source (0.8.2)
     mime-types (1.25.1)
     minitest (5.3.3)
+    mongoid (4.0.0.beta1)
+      activemodel (>= 4.0.0)
+      moped (~> 2.0.beta6)
+      origin (~> 2.1)
+      tzinfo (>= 0.3.37)
     moped (2.0.0.rc1)
       bson (~> 2.2)
       connection_pool (~> 2.0)
@@ -187,7 +182,7 @@ DEPENDENCIES
   jquery-rails
   kaminari (~> 0.15.1)
   mina!
-  mongoid (~> 4.0.0.beta1)!
+  mongoid (~> 4.0.0.beta1)
   pry
   rails (= 4.1.0)
   rest-client
