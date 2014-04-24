@@ -6,6 +6,8 @@ class AuthController < ApplicationController
     store = Auth.new(params[:email], params[:password], self).login!
     set_cookie!(store)
     redirect_to("/")
+  rescue
+    redirect_to("/sign_in")
   end
 
   def destroy
