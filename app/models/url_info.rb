@@ -51,4 +51,3 @@ class UrlInfo
     self.desc.gsub "\n", "<br/>"
   end
 end
-
