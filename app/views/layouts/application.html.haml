@@ -15,8 +15,8 @@
       .page-header
         .page-nav
           .pie.avatar.s32
-            %img{:src => self.current_store.avatar}
-          .name= self.current_store.name
+            %img{:src => self.current_user.avatar}
+          .name= self.current_user.name
 
           %a.collects{:href=>'/', :class => klass1} 
             %i.fa.fa-list

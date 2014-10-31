@@ -1,10 +1,12 @@
 class AuthController < ApplicationController
   def new
+    callback = params[:callback]
+    session[:callback] = callback if callback
+    binding.pry
+    session[:callback]
   end
 
   def create
-    store = Auth.new(params[:email], params[:password], self).login!
-    set_cookie!(store)
     redirect_to("/")
   rescue
     redirect_to("/sign_in")
@@ -24,11 +26,9 @@ class AuthController < ApplicationController
     url = "#{authorize_url}?client_id=#{key}&redirect_uri=#{callback_url}"
 
     redirect_to url
-
   end
 
   def callback
-
     code = params[:code]
 
     url_params = {
@@ -50,23 +50,20 @@ class AuthController < ApplicationController
     expires_in = body["expires_in"]
 
 
-    p body
-    p '--------========'
-    p access_token
-    p uid
-    p expires_in
+    @user = User.find_or_initialize_by(uid: uid)
+    @user.update_attributes(access_token: access_token, expires_in: expires_in)
+    @user.save
 
-    @user = User.find_or_create_by(uid: uid)
-    @user.update(access_token: access_token, expires_in: expires_in)
+    set_cookie!(@user)
 
+    binding.pry
 
-    p '------'
-    p @user
+    if session[:callback]
+      redirect = "#{session[:callback]}?auth_token=#{issue_token(@user)}"
+      session.delete :callback
+      return redirect_to redirect
+    end
 
-
-
-    render :nothing => true
-
-    
+    redirect_to :root
   end
 end

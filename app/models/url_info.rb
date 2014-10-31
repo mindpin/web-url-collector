@@ -3,7 +3,8 @@ class UrlInfo
   include Mongoid::Timestamps
   include TagMethods
 
-  belongs_to :user_store
+  belongs_to :user
+
   field :url, type: String
   field :title, type: String
   field :desc, type: String
@@ -11,7 +12,7 @@ class UrlInfo
   field :short_url, type: String
 
   validates :url, presence: true
-  validates :url, :uniqueness => {:scope => :user_store_id}
+  validates :url, :uniqueness => {:scope => :user_id}
   validates :url, format: {
     with: URI::regexp(%w(http https))
   }
