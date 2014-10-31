@@ -2,7 +2,7 @@ module ApplicationHelper
   def current_store
     email = cookies.signed[R::COOKIE_KEY] 
     return if !email
-    UserStore.where(email: CGI.unescape(email)).first
+    User.where(email: CGI.unescape(email)).first
   end
 
   def signed_in?
@@ -27,7 +27,7 @@ module ApplicationHelper
 
   def find_by_secret(secret)
     return if secret.blank?
-    store = UserStore.where(secret: secret).first
+    store = User.where(secret: secret).first
     return store if !store.blank?
     return create_user_store_by_info(secret)
   end
@@ -39,7 +39,7 @@ module ApplicationHelper
   def create_user_store_by_info(secret)
     user_info = JSON.parse(RestClient.get(user_info_url(secret)))
     return if user_info["email"].blank?
-    store = UserStore.find_or_create_by(email: user_info["email"])
+    store = User.find_or_create_by(email: user_info["email"])
     store.update_attributes(name: user_info["name"], avatar: user_info["avatar"], uid: user_info["id"], secret: user_info["secret"])
     store.save
     store
