@@ -19,7 +19,7 @@ gem "spring", :group => :development
 
 gem "unicorn"
 
-gem "debugger", :group => [:development, :test]
+# gem "debugger", :group => [:development, :test]
 
 gem "mina",
     :git => "git://github.com/fushang318/mina.git",

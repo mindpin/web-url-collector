@@ -1,0 +1,7 @@
+class WeiboOauth2
+  KEY      = "3516455898"
+  SECRET  = "d1cc70a0bb648c54fe00324fc37c6056"
+  AUTHORIZE_URL = "https://api.weibo.com/oauth2/authorize"
+  CALLBACK_URL = "http://127.0.0.1:3000/auth/weibo/callback"
+  ACCESS_TOKEN_URL = "https://api.weibo.com/oauth2/access_token"
+end

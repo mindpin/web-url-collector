@@ -12,6 +12,7 @@ capybara-*.html
 rerun.txt
 pickle-email-*.html
 config/initializers/secret_token.rb
+config/initializers/weibo_oauth2.rb
 
 ## Environment normalisation:
 /.bundle
