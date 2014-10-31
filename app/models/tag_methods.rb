@@ -4,7 +4,7 @@ module TagMethods
     return [] if tags.blank?
     raise 'url_info 还没有保存' if self.id.blank?
     param = {
-      secret: user_store.secret, 
+      token: user.token, 
       scope: R::TAG_SCOPE,
       key: self.id,
       tags: tags
@@ -18,8 +18,7 @@ module TagMethods
 
   def tags_array
     raise 'url_info 还没有保存' if self.id.blank?
-    user_store = UserStore.find(self.user_store_id)
-    uri = URI.parse(_read_tags_url(user_store.secret))
+    uri = URI.parse(_read_tags_url(user.token))
     res = Net::HTTP.get_response(uri)
     raise '获取 tags 失败' if res.code != "200"
     info = JSON.parse(res.body)
@@ -28,8 +27,8 @@ module TagMethods
 
   private
 
-  def _read_tags_url(secret)
-    "#{R::READ_TAGS_URL}?secret=#{secret}&scope=#{R::TAG_SCOPE}&key=#{self.id}"
+  def _read_tags_url(token)
+    "#{R::READ_TAGS_URL}?token=#{token}&scope=#{R::TAG_SCOPE}&key=#{self.id}"
   end
 end
 
