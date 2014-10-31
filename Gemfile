@@ -9,6 +9,7 @@ gem "haml"
 gem "pry"
 gem "mongoid", "~> 4.0.0.beta1"
 gem "bson_ext"
+gem "jwt", "~> 1.0"
 
 gem "jquery-rails"
 gem "turbolinks"

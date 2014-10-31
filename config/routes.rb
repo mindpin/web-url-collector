@@ -5,7 +5,8 @@ Rails.application.routes.draw do
   post "/sign_in",     to: "auth#create"
   get  "/sign_out",    to: "auth#destroy"
   get  "/auth/:provider/callback",    to: "auth#callback"
-  get  "/auth/weibo",    to: "auth#weibo"
+  get  "/auth/weibo",  to: "auth#weibo"
+  get  "/auth/check",  to: "auth#check"
 
   post "/collect_url", to: "url_infos#create"
   get  "/check_url",   to: "url_infos#check"

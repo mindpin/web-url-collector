@@ -1,9 +1,16 @@
 class AuthController < ApplicationController
+  def check
+    if signed_in?
+      render nothing: true, status: 200
+    else
+      render nothing: true, status: 401
+    end
+  end
+
   def new
     callback = params[:callback]
-    session[:callback] = callback if callback
-    binding.pry
-    session[:callback]
+    cookies.permanent["callback"] = callback if callback
+    callback
   end
 
   def create
@@ -16,7 +23,6 @@ class AuthController < ApplicationController
     logout!
     redirect_to("/sign_in")
   end
-
 
   def weibo
     authorize_url = WeiboOauth2::AUTHORIZE_URL
@@ -56,11 +62,9 @@ class AuthController < ApplicationController
 
     set_cookie!(@user)
 
-    binding.pry
-
-    if session[:callback]
-      redirect = "#{session[:callback]}?auth_token=#{issue_token(@user)}"
-      session.delete :callback
+    if cookies["callback"]
+      redirect = "#{cookies["callback"]}?auth_token=#{issue_token(@user)}"
+      cookies.delete :callback
       return redirect_to redirect
     end
 
