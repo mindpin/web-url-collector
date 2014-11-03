@@ -5,7 +5,7 @@ module ApplicationHelper
   end
 
   def user_id
-    cookies.signed[R::COOKIE_KEY] || auth_info["user_id"]
+     auth_info["user_id"] || cookies.signed[R::COOKIE_KEY]
   end
 
   def signed_in?
@@ -24,7 +24,7 @@ module ApplicationHelper
 
   def issue_token(user)
     claim = {
-      :user_id => user.id,
+      :user_id => user.id.to_s,
       :nbf     => Time.now,
       :exp     => 1.month.from_now
     }
@@ -33,7 +33,7 @@ module ApplicationHelper
   end
 
   def auth_header
-    request.headers["Authorization"]
+    request.env["HTTP_ATHORIZATION"]
   end
 
   def token
