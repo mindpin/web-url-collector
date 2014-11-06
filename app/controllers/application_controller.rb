@@ -3,8 +3,6 @@ class ApplicationController < ActionController::Base
 
   before_filter :cors_settings
 
-  rescue_from(JWT::DecodeError) {render nothing: true, status: 401}
-
   protected
 
   def cors_settings

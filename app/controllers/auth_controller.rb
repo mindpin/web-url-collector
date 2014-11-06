@@ -8,9 +8,6 @@ class AuthController < ApplicationController
   end
 
   def new
-    callback = params[:callback]
-    cookies.permanent["callback"] = callback if callback
-    callback
   end
 
   def create
@@ -61,12 +58,6 @@ class AuthController < ApplicationController
     @user.save
 
     set_cookie!(@user)
-
-    if cookies["callback"]
-      redirect = "#{cookies["callback"]}?auth_token=#{issue_token(@user)}"
-      cookies.delete :callback
-      return redirect_to redirect
-    end
 
     redirect_to :root
   end
