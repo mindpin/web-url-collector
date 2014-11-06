@@ -8,12 +8,12 @@ Rails.application.routes.draw do
   get  "/auth/weibo",  to: "auth#weibo"
   get  "/auth/check",  to: "auth#check"
 
-  post "/collect_url", to: "url_infos#create"
-  get  "/check_url",   to: "url_infos#check"
   get  "/get_plugin",  to: "url_infos#plugin"
   resources :url_infos
 
-
-
-
+  namespace :api do
+    get "/current_user", to: "user#info"
+    post "/collect_url", to: "url_infos#create"
+    get  "/check_url",   to: "url_infos#check"
+  end
 end
