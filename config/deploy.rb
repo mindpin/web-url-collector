@@ -15,7 +15,8 @@ set :shared_paths, [
   'config/secrets.yml',
   'tmp',
   'log',
-  'config/initializers/r.rb'
+  'config/initializers/r.rb',
+  'config/initializers/weibo_oauth2.rb'
 ]
 
 task :environment do
@@ -40,6 +41,7 @@ task :setup => :environment do
   queue! %[mkdir -p "#{deploy_to}/shared/config/initializers"]
   queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/config/initializers"]
   queue! %[touch "#{deploy_to}/shared/config/initializers/r.rb"]
+  queue! %[touch "#{deploy_to}/shared/config/initializers/weibo_oauth2.rb"]
 
   queue! %[mkdir -p "#{deploy_to}/shared/log"]
   queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/log"]
