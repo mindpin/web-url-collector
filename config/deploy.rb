@@ -14,7 +14,8 @@ set :shared_paths, [
   'config/env.yml',
   'config/secrets.yml',
   'tmp',
-  'log'
+  'log',
+  'config/initializers/r.rb'
 ]
 
 task :environment do
@@ -36,6 +37,9 @@ task :setup => :environment do
   queue! %[touch "#{deploy_to}/shared/config/env.yml"]
   queue! %[touch "#{deploy_to}/shared/config/secrets.yml"]
   
+  queue! %[mkdir -p "#{deploy_to}/shared/config/initializers"]
+  queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/config/initializers"]
+  queue! %[touch "#{deploy_to}/shared/config/initializers/r.rb"]
 
   queue! %[mkdir -p "#{deploy_to}/shared/log"]
   queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/log"]
