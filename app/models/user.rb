@@ -1,3 +1,4 @@
+require 'digest'
 class User
   include Mongoid::Document
   include Mongoid::Timestamps
@@ -15,6 +16,8 @@ class User
   before_create :set_token!
 
   def set_token!
-    self.token = Base64.encode64 self.uid
+    md5 = Digest::MD5.new
+    md5.update(self.uid)
+    self.token = md5.hexdigest  
   end
 end
