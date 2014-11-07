@@ -53,21 +53,8 @@ class AuthController < ApplicationController
       expires_in: expires_in
     )
 
-
-    u = get_weibo_user(@user)
-    name = u['name']
-    avatar = u['avatar_hd']
-
-
-    p '---------------------------------'
-    p name
-    p avatar
-    p '---------------------------------'
-
-    @user.update_attributes(
-      name: name,
-      avatar: avatar
-    )
+    update_avatar_and_name(@user)
+    
 
     set_cookie!(@user)
 
@@ -79,10 +66,19 @@ class AuthController < ApplicationController
     def get_weibo_user(user)
       url = "https://api.weibo.com/2/users/show.json?access_token=#{user.access_token}&uid=#{user.uid}"
 
-      p url
-
       res = HTTParty.get(url)
       JSON.parse(res.body)
+    end
+
+    def update_avatar_and_name(user)
+      u = get_weibo_user(user)
+      name = u['name']
+      avatar = u['avatar_hd']
+
+      user.update_attributes(
+        name: name,
+        avatar: avatar
+      )
     end
 
 
