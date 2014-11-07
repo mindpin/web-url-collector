@@ -21,6 +21,8 @@ gem "unicorn"
 
 # gem "debugger", :group => [:development, :test]
 
+gem 'httparty'
+
 gem "mina",
     :git => "git://github.com/fushang318/mina.git",
     :tag => "v0.2.0fix"

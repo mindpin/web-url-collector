@@ -53,12 +53,47 @@ class AuthController < ApplicationController
     expires_in = body["expires_in"]
 
 
+
+
     @user = User.find_or_initialize_by(uid: uid)
-    @user.update_attributes(access_token: access_token, expires_in: expires_in)
-    @user.save
+    @user.update_attributes(
+      access_token: access_token, 
+      expires_in: expires_in
+    )
+
+
+    u = get_weibo_user(@user)
+    name = u['name']
+    avatar = u['avatar_hd']
+
+
+    p '---------------------------------'
+    p name
+    p avatar
+    p '---------------------------------'
+
+    @user.update_attributes(
+      name: name,
+      avatar: avatar
+    )
 
     set_cookie!(@user)
 
     redirect_to :root
   end
+
+
+  private
+    def get_weibo_user(user)
+      url = "https://api.weibo.com/2/users/show.json?access_token=#{user.access_token}&uid=#{user.uid}"
+
+      p url
+
+      res = HTTParty.get(url)
+      JSON.parse(res.body)
+    end
+
+
+
+  
 end
