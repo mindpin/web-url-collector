@@ -6,7 +6,8 @@ class Api::UserController < ApplicationController
     
     render :json => {
       name: current_user.name,
-      avatar: "http://tp1.sinaimg.cn/1676582524/180/5696180355/1"
+      avatar: current_user.avatar,
+      collection_count: current_user.url_infos.count
     }
   end
 end
