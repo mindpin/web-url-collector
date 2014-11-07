@@ -17,7 +17,7 @@ class UrlInfo
     with: URI::regexp(%w(http https))
   }
   validates :title, presence: true
-  validates :user_store_id, presence: true
+  validates :user_id, presence: true
   validates :short_url, presence: true
 
   default_scope ->{order_by("updated_at DESC")}
