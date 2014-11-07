@@ -5,8 +5,9 @@ class Api::AuthController < ApplicationController
     end
 
     render json: {
-      name: '我是名字',
-      avatar: "http://tp1.sinaimg.cn/1676582524/180/5696180355/1"
+      name: current_user.name,
+      avatar: current_user.avatar,
+      collection_count: current_user.url_infos.count
     }
   end
 
