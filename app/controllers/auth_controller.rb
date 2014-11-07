@@ -1,12 +1,4 @@
 class AuthController < ApplicationController
-  def check
-    if signed_in?
-      render nothing: true, status: 200
-    else
-      render nothing: true, status: 401
-    end
-  end
-
   def new
   end
 
