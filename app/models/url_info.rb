@@ -2,8 +2,11 @@ class UrlInfo
   include Mongoid::Document
   include Mongoid::Timestamps
   include TagMethods
+  include Searchable
 
   belongs_to :user
+
+  searchable :title, :desc
 
   field :url, type: String
   field :title, type: String

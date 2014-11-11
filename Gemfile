@@ -19,6 +19,10 @@ gem "spring", :group => :development
 
 gem "unicorn"
 
+# 全文搜索
+gem "elasticsearch-model", :require => "elasticsearch/model"
+gem "elasticsearch-rails", :require => "elasticsearch/rails"
+
 # gem "debugger", :group => [:development, :test]
 
 gem 'httparty'
