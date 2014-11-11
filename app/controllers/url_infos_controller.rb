@@ -11,4 +11,12 @@ class UrlInfosController < ApplicationController
 
   def plugin
   end
+
+  def search_q
+    @infos = UrlInfo.quick_search(params[:q])
+    render "url_infos/search_q", layout: false
+  end
+
+  def search
+  end
 end

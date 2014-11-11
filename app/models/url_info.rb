@@ -6,7 +6,7 @@ class UrlInfo
 
   belongs_to :user
 
-  searchable :title, :desc
+  searchable :title, :desc, :tags_array
 
   field :url, type: String
   field :title, type: String
@@ -53,5 +53,11 @@ class UrlInfo
 
   def html_desc
     self.desc.gsub "\n", "<br/>"
+  end
+
+  def as_indexed_json(options={})
+    as_json.merge(tags_array: tags_array,
+                  html_desc:  html_desc,
+                  site:       site)
   end
 end

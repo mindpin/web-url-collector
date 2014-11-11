@@ -1,5 +1,6 @@
 class Api::UrlInfosController < ApplicationController
   before_filter :check_current_user
+
   def check_current_user
     if current_user.blank?
       return render :text => 401, :status => 401
@@ -7,19 +8,22 @@ class Api::UrlInfosController < ApplicationController
   end
 
   def create
+    #response = Net::HTTP.post_form(URI("http://img.4ye.me/images"), :base64 => params[:base64])
+    image_url = nil #JSON.parse(response.body)["url"]
+
     if !params[:update]
       url_info = current_user.url_infos.create!(
         url:       params[:url],
         title:     params[:title],
         desc:      params[:desc],
-        image_url: params[:image_url]
+        image_url: image_url
       )
     else
       url_info = current_user.url_infos.where(url: params[:url]).first
       url_info.update_attributes(
         title:     params[:title],
         desc:      params[:desc],
-        image_url: params[:image_url]
+        image_url: image_url
       )
     end
     tags = url_info.add_tags(params[:tags])

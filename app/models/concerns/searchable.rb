@@ -22,52 +22,56 @@ module Searchable
     def searchable(*fields)
       search_fields.merge fields
 
-      settings :index => {:number_of_shards => 1}, :analysis => chargram_analysis do
+      settings :index => {:number_of_shards => 1}, :analysis => analysis do
         mappings :dynamic => "false" do
-          fields.each do |f|
-            indexes f, :analyzer => "chargram"
+          fields.each do |field|
+            indexes field, :analyzer => :chargram
           end
         end
       end
     end
 
-    def chargram_analysis
+    def analysis
       {
         :analyzer => {
           :chargram => {
-            :type => "custom",
-            :tokenizer => "standard",
-            :filter => ["chargram"]
+            :type => :custom,
+            :tokenizer => :chargram,
+            :filter => [:lowercase]
           }
         },
 
-        :filter => {
+        :tokenizer => {
           :chargram => {
-            :type => "nGram",
+            :type => :edgeNGram,
             :min_gram => 1,
-            :max_gram => 32
+            :max_gram => 128,
+            :token_chars => [:letter, :digit],
+            :side => :front
           }
         }
       }
     end
 
-    def quick_search(q)
-      self.search(search_params(q))
+    def quick_search(q, from: 0, size: 20)
+      self.search(search_params(q, from, size))
     end
 
-    def search_params(q)
+    def search_params(q, from = 0, size = 0)
       highlight = search_fields.reduce({}) do |hash, field|
         hash[field] = {}
         hash
       end
 
       {
+        :from => from,
+        :size => size,
         :query => {
           :multi_match => {
             :fields   => search_fields.to_a,
-            :type     => "phrase",
+            :type     => :phrase,
             :query    => q,
-            :analyzer => "chargram"
+            :analyzer => :chargram
           }
         },
 
@@ -80,7 +84,7 @@ module Searchable
     end
 
     def search_fields
-      @_standard_fields ||= Set.new
+      @_search_fields ||= Set.new
     end
   end
 end

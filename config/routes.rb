@@ -8,6 +8,9 @@ Rails.application.routes.draw do
   get  "/auth/weibo",  to: "auth#weibo"
 
   get  "/get_plugin",  to: "url_infos#plugin"
+  get  "/search",      to: "url_infos#search"
+  get  "/search/:q",   to: "url_infos#search_q"
+
   resources :url_infos
 
   namespace :api do
