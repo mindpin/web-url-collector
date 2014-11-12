@@ -8,7 +8,7 @@ class Api::UrlInfosController < ApplicationController
   end
 
   def create
-    base64 = "data:image/png;base64,#{Base64.encode64(Net::HTTP.get(URI "http://img.teamkn.com/i/Dtbx7BiR.png"))}"
+    base64 = params[:base64]
 
     if !params[:update]
       url_info = current_user.url_infos.create!(
