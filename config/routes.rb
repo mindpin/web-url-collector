@@ -1,5 +1,9 @@
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
   root to: "home#show"
+
+  mount Sidekiq::Web => '/sidekiq'
 
   get  "/sign_in",     to: "auth#new"
   post "/sign_in",     to: "auth#create"

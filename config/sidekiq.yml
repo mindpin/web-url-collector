@@ -1,0 +1,3 @@
+:queues:
+  - indexer
+  - image_uploader

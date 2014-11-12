@@ -29,6 +29,10 @@ class UrlInfo
     url_info.short_url = UrlInfo.get_short_url(url_info.url)
   end
 
+  after_create do
+    ImageUploader.perform_async(self.id.to_s, self.image) if self.image
+  end
+
   def self.get_short_url(url)
     uri = URI.parse(R::SHORT_URL_URL)
     res = Net::HTTP.post_form(uri, long_url: url)
@@ -37,6 +41,14 @@ class UrlInfo
       return info["short_url"]
     end
     return ""
+  end
+
+  def image
+    @image
+  end
+
+  def image=(img)
+    @image = img
   end
 
   def site
@@ -56,8 +68,8 @@ class UrlInfo
   end
 
   def as_indexed_json(options={})
-    as_json.merge(tags_array: tags_array,
-                  html_desc:  html_desc,
-                  site:       site)
+    as_json(options).merge(tags_array: tags_array,
+                           html_desc:  html_desc,
+                           site:       site)
   end
 end

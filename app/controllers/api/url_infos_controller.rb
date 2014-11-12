@@ -8,22 +8,21 @@ class Api::UrlInfosController < ApplicationController
   end
 
   def create
-    #response = Net::HTTP.post_form(URI("http://img.4ye.me/images"), :base64 => params[:base64])
-    image_url = nil #JSON.parse(response.body)["url"]
+    base64 = "data:image/png;base64,#{Base64.encode64(Net::HTTP.get(URI "http://img.teamkn.com/i/Dtbx7BiR.png"))}"
 
     if !params[:update]
       url_info = current_user.url_infos.create!(
         url:       params[:url],
         title:     params[:title],
         desc:      params[:desc],
-        image_url: image_url
+        image:     base64
       )
     else
       url_info = current_user.url_infos.where(url: params[:url]).first
       url_info.update_attributes(
         title:     params[:title],
         desc:      params[:desc],
-        image_url: image_url
+        image:     base64
       )
     end
     tags = url_info.add_tags(params[:tags])
@@ -40,6 +39,7 @@ class Api::UrlInfosController < ApplicationController
     }
     render json: res
   rescue Exception => ex
+    puts ex.message
     render json: {status: 'error', info: ex.message}, status: 400
   end
 

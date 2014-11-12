@@ -2,11 +2,22 @@ jQuery ->
   $search  = jQuery(".search")
   $results = jQuery(".results")
 
-  $search.on "keydown", ->
-    q = $search.val()
+  values = {}
 
-    if q.length > 0
-      deferred = jQuery.get("/search/#{q}")
+  $search.on "keyup", ->
+    values.new = $search.val()
+
+    if values.new.length == 0
+      $results.html("")
+
+      values =
+        new: ""
+        old: ""
+
+    if values.new.length > 0 && values.new != values.old
+      values.old = values.new
+
+      deferred = jQuery.get("/search/#{values.new}")
 
       deferred.done (res)->
         $results.html(res)

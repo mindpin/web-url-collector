@@ -17,6 +17,11 @@ gem "sdoc", "~> 0.4.0", :group => :doc
 
 gem "spring", :group => :development
 
+gem "sidekiq"
+
+# sidekiq web ui 依赖
+gem "sinatra"
+
 gem "unicorn"
 
 # 全文搜索
