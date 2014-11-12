@@ -1,6 +1,9 @@
 class UrlInfosController < ApplicationController
+  respond_to :html, :json
+
   def show
     @url_info = UrlInfo.find(params[:id])
+    respond_with(@url_info)
   end
 
   def destroy
