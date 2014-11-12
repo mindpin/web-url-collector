@@ -6,7 +6,7 @@ app_path=$current_path/../..
 . $current_path/function.sh
 
 pid=$app_path/tmp/pids/sidekiq.pid
-log=$app_path/tmp/pids/sidekiq.log
+log=$app_path/tmp/logs/sidekiq.log
 
 case "$1" in
   start)
