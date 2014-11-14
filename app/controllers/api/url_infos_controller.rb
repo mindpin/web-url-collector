@@ -12,17 +12,18 @@ class Api::UrlInfosController < ApplicationController
 
     if !params[:update]
       url_info = current_user.url_infos.create!(
-        url:       params[:url],
-        title:     params[:title],
-        desc:      params[:desc],
-        image:     base64
+        url:         params[:url],
+        title:       params[:title],
+        desc:        params[:desc],
+        image:       base64,
+        favicon_url: params[:favicon_url]
       )
     else
       url_info = current_user.url_infos.where(url: params[:url]).first
       url_info.update_attributes(
-        title:     params[:title],
-        desc:      params[:desc],
-        image:     base64
+        title:       params[:title],
+        desc:        params[:desc],
+        image:       base64
       )
     end
     tags = url_info.add_tags(params[:tags])
@@ -32,6 +33,7 @@ class Api::UrlInfosController < ApplicationController
       title: url_info.title,
       desc: url_info.desc,
       image_url: url_info.image_url,
+      favicon_url: url_info.favicon_url,
       tags: tags, 
       user_id: current_user.uid,
       user_name: current_user.name,

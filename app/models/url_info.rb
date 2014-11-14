@@ -13,6 +13,7 @@ class UrlInfo
   field :desc, type: String
   field :image_url, type: String
   field :short_url, type: String
+  field :favicon_url, type: String
 
   validates :url, presence: true
   validates :url, :uniqueness => {:scope => :user_id}
