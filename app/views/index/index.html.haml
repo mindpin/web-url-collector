@@ -17,4 +17,6 @@
           %a.thumbnail{:href => url_for(url_info)}
             %img{:src => "#{url_info.image_url}@240w_135h_1e_1c"}
 
-    = paginate @url_infos
+    - begin
+      = paginate @url_infos
+    - rescue
