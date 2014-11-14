@@ -323,6 +323,25 @@ body {
       a {color:#0072D6;}
       margin-bottom:10px;
     }
+
+    .screenshot {
+      margin-top:20px;
+      img {
+        width:640px;height:360px;
+        margin-top:20px;
+        border:solid 1px #ddd;
+        padding:3px;
+      }
+    }
+
+    .qrcode {
+      margin-top:20px;
+      img {
+        margin-top: 20px;
+        width:120px;height:120px;
+        border:solid 1px #ccc;
+      }
+    }
   }
 }
 

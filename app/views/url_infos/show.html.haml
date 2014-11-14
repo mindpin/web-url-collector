@@ -10,6 +10,7 @@
     :ruby
       tags_array = @url_info.tags_array
       desc = @url_info.desc
+      image_url = @url_info.image_url
 
     .title= @url_info.title
     .site
@@ -24,6 +25,14 @@
       %span 短网址：
       %a{:href => @url_info.short_url}= @url_info.short_url
 
+    .qrcode
+      - code = @url_info.short_url.split('/').last()
+      - qrcode_url = "http://img.teamkn.com/qr/#{code}.png"
+
+      %span 二维条码：
+      %br
+      %img{:src => qrcode_url}
+
     - if !desc.blank?
       .desc= simple_format desc
 
@@ -32,3 +41,9 @@
         %i.fa.fa-tags
         - tags_array.each do |tag|
           %span.tag ##{tag}
+
+    - if image_url.present?
+      .screenshot
+        %span 网页截图：
+        %br
+        %img{:src => "#{image_url}@640w_360h_1e_1c"}

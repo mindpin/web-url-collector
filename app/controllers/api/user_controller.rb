@@ -1,3 +1,5 @@
+# 目前这个 api 暂时没有用到，但是预留
+
 class Api::UserController < ApplicationController
   def info
     if current_user.blank?
