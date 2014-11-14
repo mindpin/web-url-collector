@@ -54,7 +54,7 @@ body {
         content:"";
         width:128px;height:128px;
         position:absolute;
-        background: url(collector.png);
+        background: asset-url("collector.png");
         left:100%;top:-5px;
         margin-left:50px;
       }
