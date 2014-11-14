@@ -1,22 +1,13 @@
 .page-sign-in
   %form{:action => "/sign_in", :method => "post"}
     .intro
-      .s2 Web Url Collector
-      .s3 收集网址，与团队共享知识
+      .s2 
+        %span.si 4ye
+        %span Collector
+      .s3 
+        %span 收集和管理你的网址
 
     .ct
-      .fields
-        .ipt
-          %i.fa.fa-envelope
-          %input.email{:type => "text", :name => "email", :placeholder => '邮箱', :tabindex => 1}
-
-        .ipt
-          %i.fa.fa-lock
-          %input.password{:type => "password", :name => "password", :placeholder => '密码', :tabindex => 2}
-        
-        %a.btn.submit{:href => 'javascript:;'} 
-          %i.fa.fa-arrow-right
-          %span 登　录
-      .desc
-        %span 使用 MINDPIN 账号登录
-        %a{:href => "/auth/weibo", :style => "color: white;"} 微博账号登录
+      %a.btn.weibo-auth{:href => "/auth/weibo"}
+        %i.fa.fa-weibo
+        %span 微博账号登录

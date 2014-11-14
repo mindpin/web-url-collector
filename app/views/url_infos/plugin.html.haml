@@ -1,14 +1,27 @@
 .page-get-plugin
   .desc 
-    把下面的按钮拖动到浏览器书签栏，就可以使用四叶书签了！<br/>
-    Chrome 和 Firefox 浏览器都可以用。
+    %span 四叶书签提供 chrome 插件，你可以通过以下的方式安装到浏览器：
 
-  .button
-    %a.btn.plugin{:href => get_plugin_script} 四叶书签
-  .issues
-    目前已知的问题：<br/><br/>
-    1. 在 https:// 开头的网站不能用；<br/>
-    2. 在知乎等一些对 js 加载做了特殊限制的网站不能用；<br/>
-    3. 某些网站的 js 比较奇葩，会和这个插件有冲突；<br/><br/>
+  .desc
+    %strong 推荐的安装方法：
+  
+  .desc
+    %span 在下面的网址上点击右键，选择“链接另存为”：
+    %br
+    %a{:href => 'http://oss.aliyuncs.com/pie-documents/4ye/collect_0.0.5.crx'} http://oss.aliyuncs.com/pie-documents/4ye/collect_0.0.5.crx
 
-    所以，先试用吧。等进一步做成 chrome 插件后会好很多。
+  .desc
+    %span 在你的浏览器菜单内点击“工具 -> 扩展程序”
+    %br
+    %span 把你下载到的 .crx 文件拖拽到浏览器窗口内，如果显示出插件图标，说明你已经安装好啦。
+
+  .desc
+    <img src='http://img.teamkn.com/i/bm0bKN53.png' />
+
+
+  %hr
+
+  .desc
+    %strong 你也可以直接通过应用商店地址安装（如果你可以访问的话）：
+  .desc
+    %a{:href => 'https://chrome.google.com/webstore/detail/4ye-web-url-collector/nlihekgadbgfhebgbgjkddpkfhigcied', :target => '_blank'} https://chrome.google.com/webstore/detail/4ye-web-url-collector/nlihekgadbgfhebgbgjkddpkfhigcied
