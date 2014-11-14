@@ -12,7 +12,7 @@ case "$1" in
   start)
     assert_process_from_pid_file_not_exist $pid
     cd $current_path/../../
-    nohup bundle exec sidekiq -C ./config/sidekiq.yml -e production 1>> $log 2>> $log &
+    nohup bundle exec sidekiq -C -e production 1>> $log 2>> $log &
     echo $! > $pid
     echo "sidekiq start ............... $(command_status)"
   ;;

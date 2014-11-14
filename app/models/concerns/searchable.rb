@@ -4,7 +4,7 @@ module Searchable
   included do
     include Elasticsearch::Model
 
-    __elasticsearch__.client = Elasticsearch::Client.new log: true
+    __elasticsearch__.client = Elasticsearch::Client.new host: R::ELASTICSEARCH, log: true
 
     Searchable.enabled_models.add(self)
 
