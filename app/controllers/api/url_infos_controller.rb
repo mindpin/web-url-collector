@@ -26,7 +26,7 @@ class Api::UrlInfosController < ApplicationController
         image:       base64
       )
     end
-    tags = url_info.add_tags(params[:tags])
+    # tags = url_info.add_tags(params[:tags])
     res = {
       url: url_info.url,
       short_url: url_info.short_url,
@@ -34,7 +34,7 @@ class Api::UrlInfosController < ApplicationController
       desc: url_info.desc,
       image_url: url_info.image_url,
       favicon_url: url_info.favicon_url,
-      tags: tags, 
+      # tags: tags, 
       user_id: current_user.uid,
       user_name: current_user.name,
       site_url: "http://collect.4ye.me/url_infos/#{url_info.id}"
@@ -64,7 +64,7 @@ class Api::UrlInfosController < ApplicationController
           title: url_info.title,
           desc: url_info.desc,
           image_url: url_info.image_url,
-          tags: url_info.tags_array, 
+          # tags: url_info.tags_array, 
           user_id: current_user.uid,
           user_name: current_user.name,
           site_url: "http://collect.4ye.me/url_infos/#{url_info.id}"

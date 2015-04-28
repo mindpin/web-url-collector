@@ -6,7 +6,7 @@
       :ruby
         hl = url_info.highlight
         desc = url_info.desc
-        tags_array = url_info.tags_array
+        / tags_array = url_info.tags_array
 
       .url-info
         %a.title{:href => "/url_infos/#{url_info.id}"}= highlight(hl[:title], url_info.title)
@@ -17,8 +17,8 @@
         - if !desc.blank?
           .desc= simple_format(highlight(hl[:desc], desc))
 
-        - if !tags_array.blank?
-          .tags
-            %i.fa.fa-tags
-            - highlight(hl[:tags_array], tags_array).each do |tag|
-              %span.tag ##{tag}
+        / - if !tags_array.blank?
+        /   .tags
+        /     %i.fa.fa-tags
+        /     - highlight(hl[:tags_array], tags_array).each do |tag|
+        /       %span.tag ##{tag}
