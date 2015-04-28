@@ -5,14 +5,14 @@
     - @url_infos.each do |url_info|
       :ruby
         desc = url_info.desc
-        / tags_array = url_info.tags_array
+        # tags_array = url_info.tags_array
 
       .url-info
         .title
           %a{:href => url_for(url_info)}= url_info.title
         = from_site url_info
         = url_desc url_info
-        / = url_tags url_info
+        - #url_tags url_info
         - if url_info.image_url.present?
           %a.thumbnail{:href => url_for(url_info)}
             %img{:src => "#{url_info.image_url}@240w_135h_1e_1c"}
